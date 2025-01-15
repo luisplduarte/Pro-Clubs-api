@@ -17,7 +17,7 @@ export const getClubInfo = async (req: Request, res: Response) => {
     const clubId = req.params.clubId;
     
     const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
       "ngrok-skip-browser-warning": "69420",
       Accept:
         'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -85,7 +85,7 @@ export const getClubInfoByName = async (req: Request, res: Response) => {
     const clubName = req.params.clubName;
     
     const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
       "ngrok-skip-browser-warning": "69420",
       Accept:
         'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -124,7 +124,7 @@ export const getClubPlayersInfo = async (req: Request, res: Response) => {
     const clubId = req.params.clubId;
     
     const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
       "ngrok-skip-browser-warning": "69420",
       Accept:
         'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -148,7 +148,7 @@ export const getPlayerInfo = async (req: Request, res: Response) => {
     const { clubId, playerName } = req.params;
     
     const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
       "ngrok-skip-browser-warning": "69420",
       Accept:
         'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
