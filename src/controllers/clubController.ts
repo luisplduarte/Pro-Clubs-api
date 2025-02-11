@@ -7,6 +7,16 @@ import { API_BASE_URL } from '../config/index'
 // TODO: if needed, add endpoint to get last playoff and league matches for the club. 
 //See the endpoints at Postman -> EAFC 25 Clubs folder.
 
+const REQUEST_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  "ngrok-skip-browser-warning": "69420",
+  Accept:
+    'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+  'Accept-Encoding': 'gzip, deflate, br',
+};
+
+const TIMEOUT = 20000;
+
 /**
  * Endpoint that returns club information bu searching for clubId
  * @param req must have clubId in the parameters
@@ -16,18 +26,10 @@ export const getClubInfo = async (req: Request, res: Response) => {
   try {
     const clubId = req.params.clubId;
     
-    const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      "ngrok-skip-browser-warning": "69420",
-      Accept:
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-      'Accept-Encoding': 'gzip, deflate, br',
-    };
-  
     const requestParameters = `?platform=common-gen5&clubIds=${clubId}`
     
     const firstEndpointUrl = `${API_BASE_URL}/clubs/info${requestParameters}`;
-    const firstEndpointResponse = await axios.get(firstEndpointUrl, { headers: requestHeaders });
+    const firstEndpointResponse = await axios.get(firstEndpointUrl, { headers: REQUEST_HEADERS, timeout: TIMEOUT });
     const {
       name: clubName,
       regionId,
@@ -35,7 +37,7 @@ export const getClubInfo = async (req: Request, res: Response) => {
     } = firstEndpointResponse.data[clubId];
 
     const secondEndpointUrl = `${API_BASE_URL}/clubs/overallStats${requestParameters}`;
-    const secondEndpointResponse = await axios.get(secondEndpointUrl, { headers: requestHeaders });
+    const secondEndpointResponse = await axios.get(secondEndpointUrl, { headers: REQUEST_HEADERS, timeout: TIMEOUT });
     const {
       clubId: id,
       bestDivision,
@@ -83,19 +85,11 @@ export const getClubInfo = async (req: Request, res: Response) => {
 export const getClubInfoByName = async (req: Request, res: Response) => {
   try {
     const clubName = req.params.clubName;
-    
-    const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      "ngrok-skip-browser-warning": "69420",
-      Accept:
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-      'Accept-Encoding': 'gzip, deflate, br',
-    };
   
     const requestParameters = `?platform=common-gen5&clubName=${clubName}`
     
     const endpointUrl = `${API_BASE_URL}/allTimeLeaderboard/search${requestParameters}`;
-    const clubsResponse = await axios.get(endpointUrl, { headers: requestHeaders });
+    const clubsResponse = await axios.get(endpointUrl, { headers: REQUEST_HEADERS, timeout: TIMEOUT });
 
     console.log("clubsResponse.data = ", clubsResponse.data)
 
@@ -122,19 +116,11 @@ export const getClubInfoByName = async (req: Request, res: Response) => {
 export const getClubPlayersInfo = async (req: Request, res: Response) => {
   try {
     const clubId = req.params.clubId;
-    
-    const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      "ngrok-skip-browser-warning": "69420",
-      Accept:
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-      'Accept-Encoding': 'gzip, deflate, br',
-    };
   
     const requestParameters = `?platform=common-gen5&clubId=${clubId}`
     
     const endpointUrl = `${API_BASE_URL}/members/stats${requestParameters}`;
-    const clubPlayersInfoResponse = await axios.get(endpointUrl, { headers: requestHeaders });
+    const clubPlayersInfoResponse = await axios.get(endpointUrl, { headers: REQUEST_HEADERS, timeout: TIMEOUT });
 
     res.status(200).json(clubPlayersInfoResponse.data);
   } catch (error) {
@@ -146,19 +132,11 @@ export const getClubPlayersInfo = async (req: Request, res: Response) => {
 export const getPlayerInfo = async (req: Request, res: Response) => {
   try {
     const { clubId, playerName } = req.params;
-    
-    const requestHeaders = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      "ngrok-skip-browser-warning": "69420",
-      Accept:
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-      'Accept-Encoding': 'gzip, deflate, br',
-    };
   
     const requestParameters = `?platform=common-gen5&clubId=${clubId}`;
     
     const endpointUrl = `${API_BASE_URL}/members/stats${requestParameters}`;
-    const clubPlayersInfoResponse = await axios.get(endpointUrl, { headers: requestHeaders });
+    const clubPlayersInfoResponse = await axios.get(endpointUrl, { headers: REQUEST_HEADERS, timeout: TIMEOUT });
 
     const playerInfo = clubPlayersInfoResponse.data.members.find((player: { name: string }) => player.name == playerName);
     console.log("playerInfo = ", playerInfo);
