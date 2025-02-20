@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://proclubs.ea.com/api/fc';
+export const PROXY_BASE_URL = 'https://pro-clubs-api.lpmasterboss40.workers.dev';

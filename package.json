@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "vercel dev",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "prod": "npx vercel --prod",
     "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint 'src/**/*.{js,ts}' --fix"
